@@ -9,20 +9,65 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+    var firstName: String?
+    var secondName: String?
+    var phoneNumber: String = ""
+    
 //    var contact: ContactProtocol!
     @IBOutlet weak var firstNameOutlet: UITextField!
     @IBOutlet weak var secondNameOutlet: UITextField!
+    @IBOutlet weak var readyButtonOutlet: UIBarButtonItem!
+    @IBOutlet weak var groupPhone: UIView!
+    @IBOutlet weak var addNewNumberOutlet: UIButton!
+    @IBOutlet weak var numberInputOutlet: UITextField!
+    
+    weak var delegate: ViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        firstNameOutlet.text = firstName
+        secondNameOutlet.text = secondName
+        numberInputOutlet.text = phoneNumber
+    }
+    
+    @IBAction func checkFieldFirst(_ sender: UITextField) {
+        if (sender.text != "") {
+            readyButtonOutlet.isEnabled = true
+        }else {
+            readyButtonOutlet.isEnabled = false
+        }
+    }
+    
+    @IBAction func checkFieldSecond(_ sender: UITextField) {
+        if (sender.text != "") {
+            readyButtonOutlet.isEnabled = true
+        }else {
+            readyButtonOutlet.isEnabled = false
+        }
     }
     
     @IBAction func saveContact(_ sender: Any) {
-        let contact = Contact(title: firstNameOutlet.text!, phone: secondNameOutlet.text!)
-        contacts.append(contact)
+        delegate?.update(firstName: firstNameOutlet.text?.trimmingCharacters(in: CharacterSet.whitespaces) ?? "", secondName: secondNameOutlet.text?.trimmingCharacters(in: CharacterSet.whitespaces) ?? "", numberPhone: numberInputOutlet.text!)
+        
+        self.dismiss(animated: true)
     }
-//    @IBAction func showNewContactAlert(_ sender: Any) {
+    
+    @IBAction func cancelAction(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
+    @IBAction func addNewNumber(_ sender: Any) {
+        addNewNumberOutlet.isEnabled = false
+        groupPhone.isHidden = false
+        
+    }
+    
+    @IBAction func deleteNumber(_ sender: Any) {
+        numberInputOutlet.text = nil
+        groupPhone.isHidden = true
+        addNewNumberOutlet.isEnabled = true
+    }
+    //    @IBAction func showNewContactAlert(_ sender: Any) {
 //        let alertController = UIAlertController(title: "Создайте  новый контакт", message: "Введите имя и телефон", preferredStyle: .alert)
 //
 //        alertController.addTextField() { textField in

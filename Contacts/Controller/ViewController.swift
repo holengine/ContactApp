@@ -7,11 +7,23 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+protocol ViewControllerDelegate: AnyObject {
+    func update(firstName: String, secondName: String, numberPhone: String)
+}
+
+class ViewController: UIViewController, ViewControllerDelegate {
+    func update(firstName: String, secondName: String, numberPhone: String) {
+        let contact = Contact(firstName: firstName, secondName: secondName, numberPhone: numberPhone)
+        self.contacts.append(contact)
+        self.loadHeaderSections()
+        self.tableView.reloadData()
+    }
     
     var contacts: [ContactProtocol] = [] {
         didSet {
-            contacts.sort { $0.title < $1.title}
+            contacts.sort {
+                ($0.firstName?.uppercased() ?? $0.secondName?.uppercased() ?? "") < ($1.firstName?.uppercased() ?? $1.secondName?.uppercased() ?? "")
+            }
             storage.save(contacts: contacts)
         }
     }
@@ -33,18 +45,10 @@ class ViewController: UIViewController {
         loadHeaderSections()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "viewDetailContact" else { return }
-        self.loadHeaderSections()
-        self.tableView.reloadData()
-//        guard let destination = segue.destination as? DetailViewController else { return }
-//        destination.contact = contacts[1]
-     }
-    
     private func configure(cell: inout UITableViewCell, for indexPath: IndexPath) {
         var configuration = cell.defaultContentConfiguration()
-        configuration.text = "\(arrayOfHeaderSections[indexPath.section].array[indexPath.row].title)"
-//        configuration.secondaryText = "\(arrayOfHeaderSections[indexPath.section].array[indexPath.row].phone)"
+        configuration.text = "\(arrayOfHeaderSections[indexPath.section].array[indexPath.row].firstName ?? "")" + " \( arrayOfHeaderSections[indexPath.section].array[indexPath.row].secondName ?? "")"
+        configuration.secondaryText = "\(arrayOfHeaderSections[indexPath.section].array[indexPath.row].numberPhone)"
         cell.contentConfiguration = configuration
         
         let nib = UINib(nibName: "CustomHeaderView", bundle: nil)
@@ -58,15 +62,31 @@ class ViewController: UIViewController {
     
     private func loadHeaderSections() {
         arrayOfHeaderSections.removeAll()
+        arrayOfHeaderSections.append(contentsOf: [HeaderSection(title: "Profile", array: contacts)])
+        
+        var titleChar: String? = nil
+        
         for string in contacts {
-            if let letter = string.title.first {
-                var newContacts: [ContactProtocol] = []
+            if ((string.firstName?.first?.uppercased()) != nil && (string.firstName?.first?.uppercased()) != titleChar) {
+                titleChar = string.firstName?.first?.uppercased()
+                var contactsInSection: [ContactProtocol] = []
+                
                 for item in contacts {
-                    if item.title.first == letter {
-                        newContacts.append(item)
+                    if item.firstName?.first?.uppercased() == titleChar || ((item.secondName?.first?.uppercased()) != nil && item.secondName?.first?.uppercased() == titleChar) {
+                        contactsInSection.append(item)
                     }
                 }
-                arrayOfHeaderSections.append(contentsOf: [HeaderSection(title: String(letter).uppercased(), array: newContacts)])
+                arrayOfHeaderSections.append(contentsOf: [HeaderSection(title: String(titleChar!).uppercased(), array: contactsInSection)])
+            }else if ((string.secondName?.first?.uppercased()) != nil && (string.secondName?.first?.uppercased()) != titleChar){
+                titleChar = string.secondName?.first?.uppercased()
+                var contactsInSection: [ContactProtocol] = []
+                
+                for item in contacts {
+                    if item.secondName?.first?.uppercased() == titleChar || ((item.firstName?.first?.uppercased()) != nil && item.firstName?.first?.uppercased() == titleChar){
+                        contactsInSection.append(item)
+                    }
+                }
+                arrayOfHeaderSections.append(contentsOf: [HeaderSection(title: String(titleChar!).uppercased(), array: contactsInSection)])
             }
         }
     }
@@ -79,7 +99,7 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
+        if (section == 0) {
             return 1
         }else {
             return arrayOfHeaderSections[section].array.count
@@ -104,7 +124,7 @@ extension ViewController: UITableViewDataSource {
         if (indexPath.section == 0) {
             return 90
         }else {
-            return 50
+            return 70
         }
     }
     
@@ -129,6 +149,15 @@ extension ViewController: UITableViewDataSource {
             configure(cell: &cell, for: indexPath)
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let detailViewController = storyboard.instantiateViewController(identifier: "DetailViewController") as? DetailViewController else { return }
+        detailViewController.firstName = arrayOfHeaderSections[indexPath.section].array[indexPath.row].firstName
+        detailViewController.secondName = arrayOfHeaderSections[indexPath.section].array[indexPath.row].secondName
+        detailViewController.phoneNumber = arrayOfHeaderSections[indexPath.section].array[indexPath.row].numberPhone
+        show(detailViewController, sender: nil)
     }
 }
 

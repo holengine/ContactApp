@@ -8,8 +8,9 @@
 import Foundation
 
 protocol ContactProtocol {
-    var title: String {get set}
-    var phone: String {get set}
+    var firstName: String? {get set}
+    var secondName: String? {get set}
+    var numberPhone: String {get set}
 }
 
 protocol ContactStorageProtocol {
@@ -23,8 +24,9 @@ protocol HeaderSectionProtocol {
 }
 
 struct Contact: ContactProtocol {
-    var title: String
-    var phone: String   
+    var firstName: String?
+    var secondName: String?
+    var numberPhone: String
 }
 
 struct HeaderSection: HeaderSectionProtocol {
@@ -37,19 +39,21 @@ class ContactStorage: ContactStorageProtocol {
     private var storageKey = "contacts"
     
     private enum ContactKey: String {
-        case title
-        case phone
+        case firstName
+        case secondName
+        case numberPhone
     }
     
     func load() -> [ContactProtocol] {
         var resultContacts: [ContactProtocol] = []
         let contactFromStorage = storage.array(forKey: storageKey) as? [[String: String]] ?? []
         for contact in contactFromStorage {
-            guard let title = contact[ContactKey.title.rawValue],
-                  let phone = contact[ContactKey.phone.rawValue] else {
+            guard let firstName = contact[ContactKey.firstName.rawValue],
+                  let secondName = contact[ContactKey.secondName.rawValue],
+                  let numberPhone = contact[ContactKey.numberPhone.rawValue] else {
                 continue
             }
-            resultContacts.append(Contact(title: title, phone: phone))
+            resultContacts.append(Contact(firstName: firstName, secondName: secondName, numberPhone: numberPhone))
         }
         return resultContacts
     }
@@ -58,8 +62,9 @@ class ContactStorage: ContactStorageProtocol {
         var arrayFromStorage: [[String: String]] = []
         contacts.forEach { contact in
             var newElementForStorage: Dictionary<String, String> = [:]
-            newElementForStorage[ContactKey.title.rawValue] = contact.title
-            newElementForStorage[ContactKey.phone.rawValue] = contact.phone
+            newElementForStorage[ContactKey.firstName.rawValue] = contact.firstName
+            newElementForStorage[ContactKey.secondName.rawValue] = contact.secondName
+            newElementForStorage[ContactKey.numberPhone.rawValue] = contact.numberPhone
             arrayFromStorage.append(newElementForStorage)
         }
         storage.set(arrayFromStorage, forKey: storageKey)
