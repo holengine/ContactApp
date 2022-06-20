@@ -20,6 +20,7 @@
 		732DBD2B285C836D0064FE7E /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732DBD2A285C836C0064FE7E /* HeaderCell.swift */; };
 		732DBD2D285C83AD0064FE7E /* CustomHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 732DBD2C285C83AD0064FE7E /* CustomHeaderView.xib */; };
 		732DBD35285CEF6A0064FE7E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732DBD34285CEF6A0064FE7E /* DetailViewController.swift */; };
+		7376967A286077C100377D67 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73769679286077C100377D67 /* InfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		732DBD2A285C836C0064FE7E /* HeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
 		732DBD2C285C83AD0064FE7E /* CustomHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomHeaderView.xib; sourceTree = "<group>"; };
 		732DBD34285CEF6A0064FE7E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		73769679286077C100377D67 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 				732DBD2A285C836C0064FE7E /* HeaderCell.swift */,
 				732DBCF62859E2AB0064FE7E /* ViewController.swift */,
 				732DBD34285CEF6A0064FE7E /* DetailViewController.swift */,
+				73769679286077C100377D67 /* InfoViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				732DBD2B285C836D0064FE7E /* HeaderCell.swift in Sources */,
 				732DBCF72859E2AB0064FE7E /* ViewController.swift in Sources */,
 				732DBD24285A1DA40064FE7E /* Contact.swift in Sources */,
+				7376967A286077C100377D67 /* InfoViewController.swift in Sources */,
 				732DBD35285CEF6A0064FE7E /* DetailViewController.swift in Sources */,
 				732DBCF32859E2AB0064FE7E /* AppDelegate.swift in Sources */,
 				732DBCF52859E2AB0064FE7E /* SceneDelegate.swift in Sources */,

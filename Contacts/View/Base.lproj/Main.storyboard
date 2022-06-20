@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Contacts" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Main" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" customModule="Contacts" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -80,10 +81,10 @@
             </objects>
             <point key="canvasLocation" x="82.608695652173921" y="116.51785714285714"/>
         </scene>
-        <!--Detail View Controller-->
+        <!--DetailViewController-->
         <scene sceneID="ZDM-Xe-GZN">
             <objects>
-                <viewController storyboardIdentifier="DetailViewController" id="WJe-zC-IsO" customClass="DetailViewController" customModule="Contacts" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" title="DetailViewController" id="WJe-zC-IsO" customClass="DetailViewController" customModule="Contacts" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5nM-K5-otw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -101,29 +102,14 @@
                                     <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
                                 </buttonConfiguration>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y21-ou-FST">
-                                <rect key="frame" x="0.0" y="271" width="414" height="91"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
-                            </view>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Имя" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IJ3-zY-BsL">
-                                <rect key="frame" x="13" y="271" width="401" height="45"/>
+                                <rect key="frame" x="20" y="271" width="394" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" textContentType="name"/>
                                 <connections>
                                     <action selector="checkFieldFirst:" destination="WJe-zC-IsO" eventType="editingChanged" id="hps-2p-g28"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Фамилия" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Do-Vu-fJY">
-                                <rect key="frame" x="13" y="317" width="401" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <textInputTraits key="textInputTraits" textContentType="family-name"/>
-                                <connections>
-                                    <action selector="checkFieldSecond:" destination="WJe-zC-IsO" eventType="editingChanged" id="jLg-YA-dMH"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Qa-6S-fc1">
@@ -131,10 +117,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="   добавить телефон">
-                                    <imageReference key="image" image="plus.circle.fill" catalog="system" symbolScale="large"/>
+                                    <imageReference key="image" image="plus.circle.fill" catalog="system" symbolScale="large" renderingMode="original"/>
                                     <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
                                     <color key="baseForegroundColor" systemColor="labelColor"/>
-                                    <color key="baseBackgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                    <color key="baseBackgroundColor" systemColor="systemBackgroundColor"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="addNewNumber:" destination="WJe-zC-IsO" eventType="touchUpInside" id="6rM-8N-NRr"/>
@@ -152,11 +138,13 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="G55-UP-bbx"/>
                                     <barButtonItem enabled="NO" title="Готово" id="qJT-0Q-oK8">
                                         <connections>
-                                            <action selector="saveContact:" destination="WJe-zC-IsO" id="jyz-da-QfG"/>
+                                            <action selector="saveContact:" destination="WJe-zC-IsO" id="u6a-r3-Fbg"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
-                                <toolbarAppearance key="standardAppearance" backgroundEffect="regular"/>
+                                <toolbarAppearance key="standardAppearance" backgroundEffect="regular">
+                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                </toolbarAppearance>
                             </toolbar>
                             <view hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Quh-gu-34y">
                                 <rect key="frame" x="0.0" y="427" width="414" height="45"/>
@@ -165,8 +153,10 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="roN-TN-SGZ">
                                         <rect key="frame" x="0.0" y="0.0" width="138" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="minus.circle.fill" catalog="system" title="  телефон">
+                                        <buttonConfiguration key="configuration" style="plain" title="  телефон">
+                                            <imageReference key="image" image="minus.circle.fill" catalog="system" renderingMode="original"/>
                                             <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
                                         </buttonConfiguration>
                                         <connections>
@@ -176,16 +166,31 @@
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Телефон" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ycw-xS-Ycz">
                                         <rect key="frame" x="136" y="0.0" width="278" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <textInputTraits key="textInputTraits" keyboardType="phonePad" textContentType="tel"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                             </view>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Фамилия" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Do-Vu-fJY">
+                                <rect key="frame" x="20" y="318" width="394" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <textInputTraits key="textInputTraits" textContentType="family-name"/>
+                                <connections>
+                                    <action selector="checkFieldSecond:" destination="WJe-zC-IsO" eventType="editingChanged" id="jLg-YA-dMH"/>
+                                </connections>
+                            </textField>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h00-pB-VRe">
+                                <rect key="frame" x="0.0" y="271" width="20" height="92"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="nLp-TL-4tp"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="Vyi-jJ-r7b"/>
                     <connections>
@@ -201,16 +206,173 @@
             </objects>
             <point key="canvasLocation" x="869.56521739130437" y="116.51785714285714"/>
         </scene>
+        <!--Info View Controller-->
+        <scene sceneID="dK7-wI-1Yj">
+            <objects>
+                <viewController storyboardIdentifier="InfoViewController" id="oiG-BB-hSQ" customClass="InfoViewController" customModule="Contacts" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yIL-Yg-0zE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="pNe-dd-XSo">
+                                <rect key="frame" x="122" y="126" width="170" height="152"/>
+                                <color key="tintColor" red="0.74053608910000002" green="0.74395472659999995" blue="0.75421063919999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="153" id="M4M-Oe-Rdo"/>
+                                    <constraint firstAttribute="width" constant="170" id="d1m-rC-Ztx"/>
+                                </constraints>
+                            </imageView>
+                            <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gnU-Oe-Qvz">
+                                <rect key="frame" x="0.0" y="336" width="414" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" id="LlK-29-age">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="m1b-i5-u9b">
+                                            <rect key="frame" x="20" y="0.0" width="86" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <inset key="contentEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="filled" imagePlacement="top" title="написать" subtitle="" imagePadding="1">
+                                                <imageReference key="image" image="message.fill" catalog="system" symbolScale="medium"/>
+                                                <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
+                                                <color key="baseForegroundColor" name="AccentColor"/>
+                                                <color key="baseBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </buttonConfiguration>
+                                        </button>
+                                        <color key="tintColor" name="AccentColor"/>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="qTJ-xe-QK4"/>
+                                    <barButtonItem style="plain" id="JQb-nX-goC">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="2Vm-ip-Zkv">
+                                            <rect key="frame" x="116" y="0.0" width="86" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="filled" imagePlacement="top" title="вызов" imagePadding="1">
+                                                <imageReference key="image" image="phone.fill" catalog="system" symbolScale="medium"/>
+                                                <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
+                                                <color key="baseForegroundColor" name="AccentColor"/>
+                                                <color key="baseBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </buttonConfiguration>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="QKe-nJ-2bu"/>
+                                    <barButtonItem style="plain" id="EiI-Mf-7bV">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="cEP-nS-hBw">
+                                            <rect key="frame" x="212" y="0.0" width="86" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="filled" imagePlacement="top" title="видео" imagePadding="1">
+                                                <imageReference key="image" image="video.fill" catalog="system" symbolScale="medium"/>
+                                                <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
+                                                <color key="baseForegroundColor" name="AccentColor"/>
+                                                <color key="baseBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </buttonConfiguration>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Tl5-KD-ijI"/>
+                                    <barButtonItem enabled="NO" style="plain" id="9Ln-b4-Oci">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="kco-DK-dV2">
+                                            <rect key="frame" x="308" y="0.0" width="86" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="filled" imagePlacement="top" title="почта" imagePadding="1">
+                                                <imageReference key="image" image="envelope.fill" catalog="system" symbolScale="medium"/>
+                                                <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
+                                                <color key="baseForegroundColor" name="AccentColor"/>
+                                                <color key="baseBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </buttonConfiguration>
+                                        </button>
+                                    </barButtonItem>
+                                </items>
+                                <color key="barTintColor" systemColor="secondarySystemBackgroundColor"/>
+                            </toolbar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="APp-5s-5a0">
+                                <rect key="frame" x="20" y="286" width="374" height="32.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWk-yN-30N">
+                                <rect key="frame" x="20" y="393" width="374" height="62"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="номер" subtitle="сотовый" titlePadding="2" titleAlignment="leading">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="21"/>
+                                    <fontDescription key="subtitleFontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                    <color key="baseForegroundColor" systemColor="labelColor"/>
+                                    <color key="baseBackgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                </buttonConfiguration>
+                            </button>
+                            <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORJ-Bn-lIZ">
+                                <rect key="frame" x="0.0" y="58.5" width="414" height="44"/>
+                                <items>
+                                    <barButtonItem image="chevron.backward" catalog="system" id="9Rs-EH-UD6">
+                                        <imageReference key="landscapeImage" image="chevron.backward" catalog="system" symbolScale="large" renderingMode="original"/>
+                                        <connections>
+                                            <action selector="backAction:" destination="oiG-BB-hSQ" id="zBA-OT-PC9"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="mqd-ra-812"/>
+                                    <barButtonItem title="Править" id="IvW-BZ-jjq">
+                                        <connections>
+                                            <action selector="editContact:" destination="oiG-BB-hSQ" id="6ko-Db-LBb"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <toolbarAppearance key="standardAppearance" backgroundEffect="regular">
+                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                </toolbarAppearance>
+                            </toolbar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="AFw-Pk-Wat"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gnU-Oe-Qvz" firstAttribute="trailing" secondItem="AFw-Pk-Wat" secondAttribute="trailing" id="7vo-fP-cIv"/>
+                            <constraint firstItem="gWk-yN-30N" firstAttribute="top" secondItem="gnU-Oe-Qvz" secondAttribute="bottom" constant="13" id="AnP-PW-Wb0"/>
+                            <constraint firstItem="pNe-dd-XSo" firstAttribute="top" secondItem="ORJ-Bn-lIZ" secondAttribute="bottom" constant="23" id="GW7-2h-0fb"/>
+                            <constraint firstItem="APp-5s-5a0" firstAttribute="top" secondItem="pNe-dd-XSo" secondAttribute="bottom" constant="7.5" id="QXL-nu-yXz"/>
+                            <constraint firstItem="AFw-Pk-Wat" firstAttribute="trailing" secondItem="gWk-yN-30N" secondAttribute="trailing" constant="20" id="TGG-aR-HoX"/>
+                            <constraint firstItem="AFw-Pk-Wat" firstAttribute="trailing" secondItem="APp-5s-5a0" secondAttribute="trailing" constant="20" id="WJ7-yb-vfO"/>
+                            <constraint firstItem="AFw-Pk-Wat" firstAttribute="trailing" secondItem="pNe-dd-XSo" secondAttribute="trailing" constant="122" id="ZXb-Td-gpk"/>
+                            <constraint firstItem="ORJ-Bn-lIZ" firstAttribute="trailing" secondItem="AFw-Pk-Wat" secondAttribute="trailing" id="a8Z-br-bZa"/>
+                            <constraint firstItem="ORJ-Bn-lIZ" firstAttribute="leading" secondItem="AFw-Pk-Wat" secondAttribute="leading" id="aPH-cG-qDT"/>
+                            <constraint firstItem="gnU-Oe-Qvz" firstAttribute="leading" secondItem="AFw-Pk-Wat" secondAttribute="leading" id="bDY-lb-QEi"/>
+                            <constraint firstItem="gWk-yN-30N" firstAttribute="leading" secondItem="AFw-Pk-Wat" secondAttribute="leading" constant="20" id="dOJ-Za-OC1"/>
+                            <constraint firstItem="APp-5s-5a0" firstAttribute="leading" secondItem="AFw-Pk-Wat" secondAttribute="leading" constant="20" id="dZ5-cm-xu5"/>
+                            <constraint firstItem="gnU-Oe-Qvz" firstAttribute="top" secondItem="APp-5s-5a0" secondAttribute="bottom" constant="17.5" id="gPF-UX-gvC"/>
+                            <constraint firstItem="pNe-dd-XSo" firstAttribute="leading" secondItem="AFw-Pk-Wat" secondAttribute="leading" constant="122" id="oBv-Uy-68g"/>
+                            <constraint firstItem="AFw-Pk-Wat" firstAttribute="bottom" secondItem="gWk-yN-30N" secondAttribute="bottom" constant="407" id="teu-6p-KPo"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="WJJ-90-XSP"/>
+                    <connections>
+                        <outlet property="fullNameOutlet" destination="APp-5s-5a0" id="dxK-xG-kRG"/>
+                        <outlet property="phoneNumberOutlet" destination="gWk-yN-30N" id="LeK-gw-WIp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i0j-az-Qyl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="82.608695652173921" y="772.09821428571422"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="chevron.backward" catalog="system" width="96" height="128"/>
+        <image name="envelope.fill" catalog="system" width="128" height="93"/>
+        <image name="message.fill" catalog="system" width="128" height="113"/>
         <image name="minus.circle.fill" catalog="system" width="128" height="121"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="phone.fill" catalog="system" width="128" height="114"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="video.fill" catalog="system" width="128" height="82"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemGroupedBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
